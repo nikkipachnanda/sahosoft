@@ -1,0 +1,26 @@
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+
+    <div class="loginFormCont">
+      <div><h2>Login</h2></div>
+      <div class="usernotfound">
+       <span *ngIf="usernotfound"> User Not found</span>
+      </div>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="email"
+      >
+      <span class="error" *ngIf="email && email.invalid && email.touched">Email field is required.</span>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password" >
+      <span class="error" *ngIf="password && password.invalid && password.touched">Passsword field is required.</span>
+    </div>
+
+    <div class="mb-3">
+      Don't have an account? <a routerLink="/Registration">Create Account</a>
+    </div>
+   
+    <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Submit</button>
+</div>
+</form>

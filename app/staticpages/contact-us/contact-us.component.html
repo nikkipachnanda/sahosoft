@@ -1,0 +1,65 @@
+<section class="cmspage mtb-40">
+    <div class="container">
+      <div class="page-desc">
+        <div class="row justify-content-center">
+          <div class="col-md-8">
+            <h1>Contact Us</h1>
+            <div class="massage mb-3" *ngIf="datasaved">
+              {{message}}
+           </div>
+            <form [formGroup]="contactForm" (ngSubmit)="postContact()">
+              <div class="form-group">
+                <label for="" class="form-label">Name</label>
+                <input type="text" name="name" class="form-control" id="name" aria-describedby="" formControlName="name">
+                    <span class="error" *ngIf="contactForm.get('name')!.errors?.['required'] && contactForm.get('name')!.touched"> field is
+                      required.</span>
+
+                      <span class="error" *ngIf="contactForm.get('name')!.errors?.['NameNotAllowed']"> user name  is
+                        required.</span>
+
+                        <span class="error" *ngIf="contactForm.get('name')!.hasError('usernameAlreadyExists')"> user name  is
+                          exist.</span>
+
+                        
+              </div>
+              <div class="form-group">
+                <label for="" class="form-label">Email</label>
+                <input type="text" name="email" class="form-control" id="email" aria-describedby="" formControlName="email"  >
+                <span class="error" *ngIf="contactForm.get('email') && contactForm.get('email')!.invalid && contactForm.get('email')!.touched">Email  field is
+                  required.</span>
+                 <span *ngIf="contactForm.get('email')!.errors?.['emailFound']">
+                   email is found.
+                  </span>
+              </div>
+              <div class="form-group">
+                <label for="" class="form-label">Phone</label>
+                <input type="number" name="phone" class="form-control" id="phone" aria-describedby="" formControlName="phone">
+                <span class="error" *ngIf="contactForm.get('phone') && contactForm.get('phone')!.invalid && contactForm.get('phone')!.touched">Phone  field is
+                  required.</span>
+              </div>
+
+              <div class="form-group">  
+                <label for="website">City:</label>  
+                <select  class="form-select" formControlName="city">
+                  <option value="">Choose your city</option>
+                  <option  *ngFor="let item of cityData" [value]="item.city">{{item.city}}</option>
+                </select>
+                <span class="error" *ngIf="contactForm.get('city') && contactForm.get('city')!.invalid && contactForm.get('city')!.touched">City  field is
+                  required.</span>
+            </div>  
+
+              <div class="form-group">
+                <label for="" class="form-label">Message</label>
+                <textarea name="message" rows="5" class="form-control" placeholder="Message" formControlName="description"></textarea>
+                <span class="error" *ngIf="contactForm.get('description') && contactForm.get('description')!.invalid && contactForm.get('description')!.touched">Description  field is
+                  required.</span>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-success" [disabled]="contactForm.invalid">Send</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>

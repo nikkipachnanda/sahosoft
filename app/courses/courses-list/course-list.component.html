@@ -1,0 +1,17 @@
+<section class="blog-list mtb-40">
+    <div class="container">
+    
+      <div class="row">
+        <div class="col-md-4"  *ngFor="let empdata  of employeeData">
+          <div class="blog-box">
+            <img src="assets/images/{{empdata.image}}" alt="blog1" />
+            <h3>{{empdata.title}}</h3>
+            <p>{{empdata.createdby}} </p>
+            <p class="textLineWrap">{{empdata.description}}</p>
+            <a [routerLink]="['/course', empdata.id]" routerLinkActive="active" class="btn btn-danger">Read more...</a>
+          </div>
+        </div>
+       `
+      </div>
+    </div>
+  </section>

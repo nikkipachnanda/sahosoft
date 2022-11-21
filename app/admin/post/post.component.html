@@ -1,0 +1,69 @@
+<section class="dashboard-wrap mtb-40">
+    <div class="container">
+        <div class="body-content">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="dash-left">
+                        <ul>
+                            <li class="active"><a routerLink="/dashboard" routerLinkActive="active"
+                                    class="nav-link">Dashboard</a></li>
+                            <a routerLink="/post" routerLinkActive="active" class="nav-link">Posts</a>
+                            <li><a href="#">Courses</a></li>
+                            <li><a href="#">Pages</a></li>
+                            <li><a href="#">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-8">
+
+                    <div class="alert alert-success" *ng-if="datasaved"> 
+                        {{message}}
+
+                    </div>
+
+                    <form [formGroup]="regForm" (ngSubmit)="postCourse()">
+                        <div class="">
+                            <div>
+                                <h2>Create Post</h2>
+                            </div>
+                            <div class="massage" *ngIf="datasaved">
+                               {{message}}
+                            </div>
+                    
+                            <div class="mb-3">
+                                <label for="" class="form-label">Title</label>
+                                <input type="text" class="form-control" id="title" aria-describedby="" formControlName="title">
+                                <span class="error" *ngIf="title && title.invalid && title.touched">Title  field is
+                                    required.</span>
+                            </div>
+                    
+                            <div class="mb-3">
+                                <label for="" class="form-label">Author</label>
+                                <input type="text" class="form-control" id="createdby" aria-describedby="" formControlName="createdby">
+                                <span class="error" *ngIf="createdby && createdby.invalid && createdby.touched">Author field is
+                                    required.</span>
+                            </div>
+                    
+                            <div class="mb-3">
+                                <label for="" class="form-label">Full Descrition</label>
+                                <input type="text" class="form-control" id="description" aria-describedby="description"
+                                    formControlName="description">
+                                <span class="error" *ngIf="description && description.invalid && description.touched">Full field is required.</span>
+                            </div>
+                    
+                            <div class="mb-3">
+                                <label for="" class="form-label">Upload Image</label>
+                                <input type="file" class="form-control" formControlName="image"  #Image accept="image/*" (change)="handleFileInput($any($event.target).files)" >
+                                <img width="100" height="100" src={{postimage}}/>
+                            </div>
+                    
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary" >Add Post</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,8 @@
+<ul class="mt-3">
+
+    <li class="tiles" *ngFor="let course of courseArr">
+      {{course.addcourselist}}
+      <button (click)="delEvent (course.id)" class="btn btn-danger" type="button" style="padding:2px;">X</button>
+    </li>
+</ul>
+

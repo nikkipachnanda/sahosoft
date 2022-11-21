@@ -1,0 +1,21 @@
+<section class="blog-detail mtb-40">
+  <div class="container">
+  
+
+    <div class="row">
+      <div class="col-md-8">
+        <div class="blog-left">
+          <h1>{{employeeData.title}}</h1>
+          <div class="mt-3"><img src="assets/images/{{employeeData.image}}" width="400" alt="blog1" /></div>
+          <div class="mt-3">{{ employeeData.createdby}}</div>
+          <div class="mt-3"> {{ employeeData.description}}</div>
+          <button type="submit" class="btn btn-primary mt-3" (click)="backClicked()"  >Back</button>
+         </div>
+      </div>
+      <div class="col-md-4">
+        <app-course-recent></app-course-recent>
+        <app-course-categories></app-course-categories>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,52 @@
+<form [formGroup]="regForm" (ngSubmit)="createemployee()">
+    <div class="loginFormCont">
+        <div>
+            <h2>User Registration</h2>
+        </div>
+        <div class="massage" *ngIf="datasaved">
+           {{massage}}
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="firstname1" aria-describedby="" formControlName="FirstName">
+            <span class="error" *ngIf="FirstName && FirstName.invalid && FirstName.touched">First Name field is
+                required.</span>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="firstname1" aria-describedby="" formControlName="LastName">
+            <span class="error" *ngIf="LastName && LastName.invalid && LastName.touched">First Name field is
+                required.</span>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                formControlName="EmailId">
+            <span class="error" *ngIf="EmailId && EmailId.invalid && EmailId.touched">Email field is required.</span>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" formControlName="Password">
+            <span class="error" *ngIf="Password && Password.invalid && Password.touched">Passsword field is
+                required.</span>
+        </div>
+        
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" formControlName="confirmPassword">
+            <span class="error" *ngIf="regForm.get('confirmPassword')!.errors?.['required'] && regForm.get('confirmPassword')!.touched">Passsword field is
+                required.</span>
+                <span  class="error" *ngIf="regForm.get('confirmPassword')!.errors?.['confirmedValidator']">
+                Passsword field is
+                    not matched.</span>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary" [disabled]="regForm.invalid">SignUp</button>
+        </div>
+    </div>
+</form>

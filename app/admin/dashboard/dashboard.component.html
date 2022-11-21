@@ -1,0 +1,131 @@
+<section class="dashboard-wrap mtb-40">
+    <div class="container">
+          <div class="body-content">
+          <div class="row">
+            <div class="col-md-3">
+                      <div class="dash-left">
+                          <ul>
+                              <li class="active"><a routerLink="/dashboard" routerLinkActive="active" class="nav-link">Dashboard</a></li>
+                              <a routerLink="/post" routerLinkActive="active" class="nav-link" >Posts</a>
+                              <li><a href="#">Courses</a></li>
+                              <li><a href="#">Pages</a></li>
+                              <li><a href="#">Logout</a></li>
+                          </ul>
+                      </div>   
+                  </div>
+                  <div class="col-md-9">
+                      <div class="dash-right">
+                        <div class="dash-header">
+                            <div class="dash-title">
+                                <h1></h1>
+                            </div>
+                            <div class="dash-nav">
+                                <a routerLink="/post" class="btn btn-success">Add Post</a>
+                            </div>
+                          </div>
+                          <div class="mt-3">
+                            <input type="text" class="form-control"  placeholder="Enter Keyword for filter result" [(ngModel)]="searchedKeyword">
+                          </div>
+                          
+                          <table class="table table-bordered table-striped mt-3">
+                            <tr>
+                                <th (click)="sort('id')">#ID <i class="fa fa-sort"></i></th>
+                                <th>Image</th>  
+                                <th (click)="sort('title')">Title <i class="fa fa-sort"></i></th>
+                                <th>Created BY</th>
+                                <th>Descrition</th>
+                                <th>Action</th>
+                            </tr>
+
+                            <tr>
+                              <td>{{error}}</td>
+                            </tr>
+                            <tr *ngFor="let post of post | filter:searchedKeyword | orderBy:key:reverse | paginate: { itemsPerPage: 5, currentPage: p }">
+                                <td>{{post.id}}</td>
+                                <td><img src="http://localhost:4200/assets/images/{{post.image}}" ></td>
+                                <td>{{post.title}}</td>
+                                <td>{{post.createdby}}</td>
+                                <td class="textLineWrap">{{post.description}}</td>
+                                <td class="action" width="15%">
+                                    <button type="button" class="btn btn-primary edit" (click)="onedit(post)" data-toggle="modal" data-target="#myModal">
+                                        Edit
+                                      </button>
+                                    <button (click)="delete(post.id)" class="btn btn-danger" type="button">Delete</button>
+                                </td>
+                            </tr>
+                          </table>
+                          <div>
+                            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                          </div>
+                          <h3  class="mt-3 row">Add Course List</h3>
+                          <div class="mt-3 row"> 
+                            <form [formGroup]="addCourseForm" >  
+                           <div class="col-md-6 float-left"> <input type="text" class="form-control " formControlName="addcourselist" aria-describedby=""   #courseInp ></div>  
+                           <div class="col-md-6 float-left"><button  type="button" class="btn btn-danger"  (click)="addCourse()">Add Course</button></div>
+                          </form>
+                          </div>
+                          <app-courselistivew [course]="courselist" (delEvnt)="removeCourseList($event)" ></app-courselistivew>
+                      </div>   
+                  </div>
+          </div>
+          </div>
+    </div>
+   
+    <div class="container">
+
+        <!-- Button to Open the Modal -->
+      
+      
+        <!-- The Modal -->
+        <div class="modal" id="myModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+            
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Modal Heading</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              
+              <!-- Modal body -->
+             
+              <div class="modal-body">
+                <form [formGroup]="regForm" > 
+
+                 
+                <div class="mb-3">
+                    <label for="" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" aria-describedby="" formControlName="title">
+                    <span class="error" *ngIf="title && title.invalid && title.touched">Title  field is
+                        required.</span>
+                </div>
+        
+                <div class="mb-3">
+                    <label for="" class="form-label">Author</label>
+                    <input type="text" class="form-control" id="createdby" aria-describedby="" formControlName="createdby">
+                    <span class="error" *ngIf="createdby && createdby.invalid && createdby.touched">Author field is
+                        required.</span>
+                </div>
+        
+                <div class="mb-3">
+                    <label for="" class="form-label">Full Descrition</label>
+                    <input type="text" class="form-control" id="description" aria-describedby="description"
+                        formControlName="description">
+                    <span class="error" *ngIf="description && description.invalid && description.touched">Full field is required.</span>
+                </div>
+            </form>
+              </div>
+           
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="cancel">Close</button>
+                <button type="button" class="btn btn-primary edit" (click)="updateemployee(post.id)">Update</button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+  </section>
