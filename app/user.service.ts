@@ -8,6 +8,6 @@ export class UserService {
   constructor() { }
   isAdminRights() 
   {
-    return true;
+    return true; 
   }
 }
